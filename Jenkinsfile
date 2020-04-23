@@ -5,8 +5,7 @@ node {
        branch: env.BRANCH_NAME
     )
     sh "ls -latr"
-    dir('spring-jenkins-pipeline') {
-        stage("Compilation and Analysis") {
+       stage("Compilation and Analysis") {
             parallel 'Compilation': {
                 sh "ls -latr"
                 sh "./mvnw clean install -DskipTests"
@@ -63,5 +62,5 @@ node {
                 }
             }
         }
-    }
+    
 }
