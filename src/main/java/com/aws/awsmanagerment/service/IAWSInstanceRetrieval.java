@@ -1,5 +1,7 @@
 package com.aws.awsmanagerment.service;
 
+import software.amazon.awssdk.services.ec2.model.Instance;
+
 import java.util.List;
 
 public interface IAWSInstanceRetrieval {
@@ -8,20 +10,35 @@ public interface IAWSInstanceRetrieval {
      * Method to get all servers
      * @return
      */
-    boolean getAllServers();
+    List<Instance> getAllServers();
 
     /**
      * Method to get an instance with a tag
      * @param tagName
      * @return
      */
-    boolean getInstancesWithTag(String tagName);
+    List<Instance> getInstancesWithTag(String tagName);
+
+    /**
+     * Method to get an instance with a tag and values
+     * @param tagName
+     * @param expectedTagValues
+     * @return
+     */
+    List<Instance> getInstancesWithTagAndValues(String tagName, List<String> expectedTagValues);
 
     /**
      * Method to get an instance without a tag and set of values
      * @param tagName
-     * @param values
      * @return
      */
-    boolean getInstancesWithoutTagAndvalues(String tagName, List<String> values);
+    List<Instance> getInstancesWithoutTag(String tagName);
+
+    /**
+     * Method to get an instance without a tag and set of values
+     * @param tagName
+     * @param expectedTagValues
+     * @return
+     */
+    List<Instance> getInstancesWithoutTagAndValues(String tagName, List<String> expectedTagValues);
 }

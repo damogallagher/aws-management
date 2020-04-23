@@ -1,18 +1,20 @@
 package com.aws.awsmanagerment.service;
 
+import java.util.List;
+
 public interface IAWSInstanceActions {
 
     /**
-     * Method to start a server
-     * @param instanceId
+     * Method to start servers
+     * @param instanceIds
      * @return
      */
-    boolean startServer(String instanceId);
+    boolean startServers(List<String> instanceIds);
 
     /**
-     * Method to stop a server
-     * @param instanceId
+     * Method to stop servers
+     * @param instanceIds
      * @return
      */
-    boolean stopServer(String instanceId);
+    boolean stopServers(List<String> instanceIds);
 }
