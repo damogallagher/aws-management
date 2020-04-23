@@ -38,9 +38,20 @@ Init the project (should only need to be done if cloning a new repo)
 terraform init
 ```
 
-See what changes terraform will make in your environment (i)
+See what changes terraform will make in your environment (in our case - AWS)
+
 ```
 terraform plan
 ```
 
 Apply changes to your environment
+
+```
+terraform apply
+```
+
+Remove infrastructure from your environment
+
+```
+terraform destroy
+```
