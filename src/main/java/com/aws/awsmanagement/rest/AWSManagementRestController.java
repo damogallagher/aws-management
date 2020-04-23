@@ -40,4 +40,9 @@ public class AWSManagementRestController {
     public ResponseDTO startAllServers() {
         return awsManagement.startAllServers();
     }
+
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello World";
+    }
 }
