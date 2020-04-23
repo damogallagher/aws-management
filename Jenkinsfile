@@ -6,11 +6,11 @@ pipeline{
    // env.JAVA_HOME = "${jdk}"
    // echo "jdk installation path is: ${jdk}"
 
-    git(
-       url: 'git@github.com:damogallagher/aws-management.git',
-       credentialsId: 'bitnami',
-       branch: env.BRANCH_NAME
-    )
+    //git(
+    //   url: 'git@github.com:damogallagher/aws-management.git',
+    //   credentialsId: 'bitnami',
+    //   branch: env.BRANCH_NAME
+    //)
     options
     {
         buildDiscarder(logRotator(numToKeepStr: '3'))
