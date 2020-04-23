@@ -23,6 +23,7 @@ resource "aws_appautoscaling_policy" "up" {
       metric_interval_lower_bound = 0
       scaling_adjustment          = 1
     }
+
   }
 
   depends_on = [aws_appautoscaling_target.target]
@@ -58,7 +59,7 @@ resource "aws_cloudwatch_metric_alarm" "service_cpu_high" {
   namespace           = "AWS/ECS"
   period              = "60"
   statistic           = "Average"
-  threshold           = "85"
+  threshold           = "80"
 
   dimensions = {
     ClusterName = aws_ecs_cluster.main.name
@@ -77,7 +78,7 @@ resource "aws_cloudwatch_metric_alarm" "service_cpu_low" {
   namespace           = "AWS/ECS"
   period              = "60"
   statistic           = "Average"
-  threshold           = "10"
+  threshold           = "25"
 
   dimensions = {
     ClusterName = aws_ecs_cluster.main.name
