@@ -25,26 +25,12 @@ pipeline{
 
        stage("Compilation and Analysis") {
            steps {
-            parallel (
-                'Compilation': {
+
+                script {
                     sh "echo $JAVA_HOME "
                     sh "java -version"
                     sh "./mvnw clean install -DskipTests"
-                }, 
-                'Static Analysis': {
-                    sh "./mvnw checkstyle:checkstyle"
-                    sh "ls -latr "
-                    sh "ls -latr target/"
-                    /*step([$class: 'CheckStylePublisher',
-                      canRunOnFailed: true,
-                      defaultEncoding: '',
-                      healthy: '100',
-                      pattern: '/target/checkstyle-result.xml',
-                      unHealthy: '90',
-                      useStableBuildAsReference: true
-                    ])*/
-            }
-            )
+                }
            }
         }
 
