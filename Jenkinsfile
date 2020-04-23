@@ -1,4 +1,4 @@
-pipeline {
+node {
 
     jdk = tool name: 'JDK8'
     env.JAVA_HOME = "${jdk}"
