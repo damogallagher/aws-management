@@ -8,7 +8,10 @@ resource "aws_iam_role" "ecs_task_execution_role" {
     {
       "Action": "sts:AssumeRole",
       "Principal": {
-        "Service": "ec2.amazonaws.com"
+        "Service": [
+            "ecs.amazonaws.com",
+            "ecs-tasks.amazonaws.com"
+         ]
       },
       "Effect": "Allow",
       "Sid": ""
@@ -20,9 +23,9 @@ EOF
 }
 
 resource "aws_iam_policy" "policy" {
-  name        = "test_policy"
+  name        = "ecs_policy"
   path        = "/"
-  description = "My test policy"
+  description = "My ecs policy"
 
   policy = <<EOF
 {
@@ -58,31 +61,16 @@ resource "aws_iam_role" "ecs_auto_scale_role" {
   "Version": "2012-10-17",
   "Statement": [
     {
+      "Action": "sts:AssumeRole",
       "Effect": "Allow",
-      "Action": [
-        "application-autoscaling:*",
-        "ecs:DescribeServices",
-        "ecs:UpdateService",
-        "cloudwatch:DescribeAlarms",
-        "cloudwatch:PutMetricAlarm",
-        "cloudwatch:DeleteAlarms",
-        "cloudwatch:DescribeAlarmHistory",
-        "cloudwatch:DescribeAlarms",
-        "cloudwatch:DescribeAlarmsForMetric",
-        "cloudwatch:GetMetricStatistics",
-        "cloudwatch:ListMetrics",
-        "cloudwatch:PutMetricAlarm",
-        "cloudwatch:DisableAlarmActions",
-        "cloudwatch:EnableAlarmActions",
-        "iam:CreateServiceLinkedRole",
-        "sns:CreateTopic",
-        "sns:Subscribe",
-        "sns:Get*",
-        "sns:List*"
-      ]
+      "Principal": {
+        "Service": [
+            "ecs.amazonaws.com",
+            "ecs-tasks.amazonaws.com"
+         ]
+      }
     }
   ]
 }
 EOF
-
 }
