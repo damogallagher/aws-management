@@ -1,9 +1,10 @@
-new Pipeline(this).withMaven('3.5.0').withJava('8').execute {
+pipeline{
+    agent any
 
-    node {
-    jdk = tool name: 'JDK8'
-    env.JAVA_HOME = "${jdk}"
-    echo "jdk installation path is: ${jdk}"
+
+   // jdk = tool name: 'JDK8'
+   // env.JAVA_HOME = "${jdk}"
+   // echo "jdk installation path is: ${jdk}"
 
     git(
        url: 'git@github.com:damogallagher/aws-management.git',
@@ -14,7 +15,7 @@ new Pipeline(this).withMaven('3.5.0').withJava('8').execute {
     {
         buildDiscarder(logRotator(numToKeepStr: '3'))
     }
-    agent any
+
     environment 
     {
         VERSION = 'latest'
@@ -120,6 +121,6 @@ new Pipeline(this).withMaven('3.5.0').withJava('8').execute {
             sh "docker rmi $IMAGE | true"
         }
     }
-    }
+    
 
 }
