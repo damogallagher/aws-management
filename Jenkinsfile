@@ -10,7 +10,6 @@ node {
        branch: env.BRANCH_NAME
     )
 
-    agent any
     environment 
     {
         VERSION = 'latest'
