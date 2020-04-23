@@ -6,7 +6,7 @@ docker build -t damogallagher/awsmanagement .
 ## Run locally
 docker run -p 8080:8080 --rm damogallagher/awsmanagement
 
-#ECR commands
+#Deploy to ECR commands
 Retrieve an authentication token and authenticate your Docker client to your registry.
 Use the AWS CLI:
 ```
@@ -29,3 +29,18 @@ Run the following command to push this image to your newly created AWS repositor
 ```
 docker push 858398790708.dkr.ecr.us-east-1.amazonaws.com/damiengallagher:latest
 ```
+
+# Terraform commands
+When in the terraform directory - you can run the following commands 
+
+Init the project (should only need to be done if cloning a new repo)
+``` 
+terraform init
+```
+
+See what changes terraform will make in your environment (i)
+```
+terraform plan
+```
+
+Apply changes to your environment
