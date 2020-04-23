@@ -1,6 +1,6 @@
 node {
 
-jdk = tool name: 'JDK17'
+jdk = tool name: 'JDK8'
   env.JAVA_HOME = "${jdk}"
 
   echo "jdk installation path is: ${jdk}"
