@@ -15,7 +15,7 @@ data "template_file" "awsmanagement_app" {
 }
 
 resource "aws_ecs_task_definition" "app" {
-  family                   = "awsmanagement-app-task"
+  family                   = "awsmanagement-service"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]

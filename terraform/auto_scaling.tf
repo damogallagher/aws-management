@@ -10,9 +10,9 @@ resource "aws_appautoscaling_target" "target" {
 # Automatically scale capacity up by one
 resource "aws_appautoscaling_policy" "up" {
   name               = "awsmanagement_scale_up"
-  resource_id        = "${aws_appautoscaling_target.target.resource_id}"
-  scalable_dimension = "${aws_appautoscaling_target.target.scalable_dimension}"
-  service_namespace  = "${aws_appautoscaling_target.target.service_namespace}"
+  resource_id        = aws_appautoscaling_target.target.resource_id
+  scalable_dimension = aws_appautoscaling_target.target.scalable_dimension
+  service_namespace  = aws_appautoscaling_target.target.service_namespace
 
   step_scaling_policy_configuration {
     adjustment_type         = "ChangeInCapacity"
@@ -31,9 +31,9 @@ resource "aws_appautoscaling_policy" "up" {
 # Automatically scale capacity down by one
 resource "aws_appautoscaling_policy" "down" {
   name               = "awsmanagement_scale_down"
-  resource_id        = "${aws_appautoscaling_target.target.resource_id}"
-  scalable_dimension = "${aws_appautoscaling_target.target.scalable_dimension}"
-  service_namespace  = "${aws_appautoscaling_target.target.service_namespace}"
+  resource_id        = aws_appautoscaling_target.target.resource_id
+  scalable_dimension = aws_appautoscaling_target.target.scalable_dimension
+  service_namespace  = aws_appautoscaling_target.target.service_namespace
 
   step_scaling_policy_configuration {
     adjustment_type         = "ChangeInCapacity"

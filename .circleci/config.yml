@@ -1,7 +1,6 @@
 version: 2.1
 
 orbs:
-  maven: circleci/maven@0.0.12
   aws-ecr: circleci/aws-ecr@6.8.2
   aws-ecs: circleci/aws-ecs@01.1.0
 
