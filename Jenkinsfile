@@ -35,7 +35,7 @@ jdk = tool name: 'JDK8'
             parallel 'Unit tests': {
                 stage("Runing unit tests") {
                     try {
-                        sh "./mvnw test -Punit"
+                        sh "./mvnw test -Punit -PskipTests=false"
                     } catch(err) {
                         step([$class: 'JUnitResultArchiver', testResults:
                           '**/target/surefire-reports/TEST-*UnitTest.xml'])
@@ -44,29 +44,9 @@ jdk = tool name: 'JDK8'
                    step([$class: 'JUnitResultArchiver', testResults:
                      '**/target/surefire-reports/TEST-*UnitTest.xml'])
                 }
-            }, 'Integration tests': {
-                stage("Runing integration tests") {
-                    try {
-                        sh "./mvnw test -Pintegration"
-                    } catch(err) {
-                        step([$class: 'JUnitResultArchiver', testResults:
-                          '**/target/surefire-reports/TEST-'
-                            + '*IntegrationTest.xml'])
-                        throw err
-                    }
-                    step([$class: 'JUnitResultArchiver', testResults:
-                      '**/target/surefire-reports/TEST-'
-                        + '*IntegrationTest.xml'])
-                }
             }
 
-            stage("Staging") {
-                sh "pid=\$(lsof -i:8989 -t); kill -TERM \$pid "
-                  + "|| kill -KILL \$pid"
-                withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
-                    sh 'nohup ./mvnw spring-boot:run -Dserver.port=8989 &'
-                }
-            }
+
         }
     
 }
