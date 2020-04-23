@@ -50,9 +50,7 @@ pipeline{
         }
 
         stage("Tests and Deployment") {
-            steps {
-            parallel ('Unit tests': {
-                stage("Runing unit tests") {
+                stage("Running unit tests") {
                     try {
                         sh "./mvnw test -DskipTests=false"
                         sh "ls -latr target/"
@@ -65,9 +63,6 @@ pipeline{
                    step([$class: 'JUnitResultArchiver', testResults:
                      '**/target/surefire-reports/TEST-*Test*.xml'])
                 }
-            })
-            }
-
         }
     
         stage('Build preparations')
