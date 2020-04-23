@@ -2,8 +2,18 @@ version: 2.1
 
 orbs:
   maven: circleci/maven@0.0.12
+  aws-ecr: circleci/aws-ecr@6.8.2
+  aws-ecs: circleci/aws-ecs@01.1.0
 
 workflows:
-  maven_test:
+  build-and-deploy:
     jobs:
-      - maven/test # checkout, build, test, and upload test results
+      - aws-ecr/build_and_push_image:
+          repo: "${AWS_RESOURCE_NAME_PREFIX}"
+          tag: "${CIRCLE_SHA1}"
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build_and_push_image # only run this job once aws-ecr/build_and_push_image has completed
+          family: "${AWS_RESOURCE_NAME_PREFIX}-service"
+          cluster-name: "${AWS_RESOURCE_NAME_PREFIX}-cluster"
+          container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
