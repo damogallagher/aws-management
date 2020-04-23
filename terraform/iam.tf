@@ -10,7 +10,8 @@ resource "aws_iam_role" "ecs_task_execution_role" {
       "Principal": {
         "Service": [
             "ecs.amazonaws.com",
-            "ecs-tasks.amazonaws.com"
+            "ecs-tasks.amazonaws.com",
+            "ssm.amazonaws.com"
          ]
       },
       "Effect": "Allow",
@@ -19,7 +20,6 @@ resource "aws_iam_role" "ecs_task_execution_role" {
   ]
 }
 EOF
-
 }
 
 resource "aws_iam_policy" "policy" {
@@ -39,7 +39,11 @@ resource "aws_iam_policy" "policy" {
                 "ecr:GetDownloadUrlForLayer",
                 "ecr:BatchGetImage",
                 "logs:CreateLogStream",
-                "logs:PutLogEvents"
+                "logs:PutLogEvents",
+                "ec2:DescribeInstances",
+                "ec2:StartInstances",
+                "ec2:StopInstances",
+                "ssm:GetParameter"
             ],
             "Resource": "*"
         }
