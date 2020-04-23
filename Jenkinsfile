@@ -4,6 +4,7 @@ node {
        credentialsId: 'bitnami',
        branch: env.BRANCH_NAME
     )
+    sh "ls -latr"
     dir('spring-jenkins-pipeline') {
         stage("Compilation and Analysis") {
             parallel 'Compilation': {
