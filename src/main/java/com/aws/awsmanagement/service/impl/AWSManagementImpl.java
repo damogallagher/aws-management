@@ -1,10 +1,10 @@
-package com.aws.awsmanagerment.service.impl;
+package com.aws.awsmanagement.service.impl;
 
-import com.aws.awsmanagerment.dto.ResponseDTO;
-import com.aws.awsmanagerment.service.IAWSInstanceActions;
-import com.aws.awsmanagerment.service.IAWSInstanceRetrieval;
-import com.aws.awsmanagerment.service.IAWSManagement;
-import com.aws.awsmanagerment.service.IAWSSsmActions;
+import com.aws.awsmanagement.dto.ResponseDTO;
+import com.aws.awsmanagement.service.IAWSInstanceActions;
+import com.aws.awsmanagement.service.IAWSInstanceRetrieval;
+import com.aws.awsmanagement.service.IAWSManagement;
+import com.aws.awsmanagement.service.IAWSSsmActions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

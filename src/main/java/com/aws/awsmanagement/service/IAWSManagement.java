@@ -1,6 +1,6 @@
-package com.aws.awsmanagerment.service;
+package com.aws.awsmanagement.service;
 
-import com.aws.awsmanagerment.dto.ResponseDTO;
+import com.aws.awsmanagement.dto.ResponseDTO;
 
 import java.util.List;
 

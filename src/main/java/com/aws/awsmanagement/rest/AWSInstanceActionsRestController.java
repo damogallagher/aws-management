@@ -1,6 +1,6 @@
-package com.aws.awsmanagerment.rest;
+package com.aws.awsmanagement.rest;
 
-import com.aws.awsmanagerment.service.IAWSInstanceActions;
+import com.aws.awsmanagement.service.IAWSInstanceActions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

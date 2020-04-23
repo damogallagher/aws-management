@@ -1,4 +1,4 @@
-package com.aws.awsmanagerment.config;
+package com.aws.awsmanagement.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

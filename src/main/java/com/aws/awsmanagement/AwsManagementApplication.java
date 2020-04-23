@@ -1,13 +1,13 @@
-package com.aws.awsmanagerment;
+package com.aws.awsmanagement;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AwsManagermentApplication {
+public class AwsManagementApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AwsManagermentApplication.class, args);
+		SpringApplication.run(AwsManagementApplication.class, args);
 	}
 
 }

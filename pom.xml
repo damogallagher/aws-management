@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.aws</groupId>
-	<artifactId>AWSManagerment</artifactId>
+	<artifactId>AWSManagement</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>AWSManagerment</name>
+	<name>AWSManagement</name>
 	<description>Spring Boot Project to Demonstrate Server Management</description>
 
 	<properties>

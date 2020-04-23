@@ -1,6 +1,6 @@
-package com.aws.awsmanagerment.service.impl;
+package com.aws.awsmanagement.service.impl;
 
-import com.aws.awsmanagerment.service.IAWSInstanceActions;
+import com.aws.awsmanagement.service.IAWSInstanceActions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

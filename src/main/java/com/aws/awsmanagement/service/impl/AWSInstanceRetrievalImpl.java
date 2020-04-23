@@ -1,7 +1,7 @@
-package com.aws.awsmanagerment.service.impl;
+package com.aws.awsmanagement.service.impl;
 
-import com.aws.awsmanagerment.service.IAWSInstanceActions;
-import com.aws.awsmanagerment.service.IAWSInstanceRetrieval;
+import com.aws.awsmanagement.service.IAWSInstanceActions;
+import com.aws.awsmanagement.service.IAWSInstanceRetrieval;
 import java.util.LinkedList;
 import java.util.List;
 import org.slf4j.Logger;

@@ -1,7 +1,7 @@
-package com.aws.awsmanagerment.rest;
+package com.aws.awsmanagement.rest;
 
-import com.aws.awsmanagerment.dto.ResponseDTO;
-import com.aws.awsmanagerment.service.IAWSManagement;
+import com.aws.awsmanagement.dto.ResponseDTO;
+import com.aws.awsmanagement.service.IAWSManagement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;

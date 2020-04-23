@@ -1,4 +1,4 @@
-package com.aws.awsmanagerment.service;
+package com.aws.awsmanagement.service;
 
 import software.amazon.awssdk.services.ec2.model.Instance;
 

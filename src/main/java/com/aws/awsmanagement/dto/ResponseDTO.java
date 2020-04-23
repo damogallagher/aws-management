@@ -1,4 +1,4 @@
-package com.aws.awsmanagerment.dto;
+package com.aws.awsmanagement.dto;
 
 import lombok.*;
 

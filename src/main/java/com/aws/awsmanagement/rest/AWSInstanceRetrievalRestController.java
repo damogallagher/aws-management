@@ -1,6 +1,6 @@
-package com.aws.awsmanagerment.rest;
+package com.aws.awsmanagement.rest;
 
-import com.aws.awsmanagerment.service.IAWSInstanceRetrieval;
+import com.aws.awsmanagement.service.IAWSInstanceRetrieval;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;

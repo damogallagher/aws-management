@@ -1,4 +1,4 @@
-package com.aws.awsmanagerment.service;
+package com.aws.awsmanagement.service;
 
 public interface IAWSSsmActions {
 
