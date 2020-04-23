@@ -18,7 +18,7 @@ pipeline{
         IMAGE = 'aws_management:latest'
         ECRURL = 'http://858398790708.dkr.ecr.us-east-1.amazonaws.com'
         ECRCRED = 'ecr:us-east-1:aws_management'
-        JAVA_HOME = '/opt/bitnami/java'
+        JAVA_HOME = '/opt/bitnami/java/bin'
     }
     stages
     {
