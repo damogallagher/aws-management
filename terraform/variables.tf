@@ -13,7 +13,11 @@ variable "app_image" {
   default     = "858398790708.dkr.ecr.us-east-1.amazonaws.com/damiengallagher:latest"
 }
 
-variable "app_port" {
+variable "lb_port" {
+  description = "Port exposed by the load balancer to listen to traffic on"
+  default     = 80
+}
+variable "container_app_port" {
   description = "Port exposed by the docker image to redirect traffic to"
   default     = 8080
 }
