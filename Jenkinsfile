@@ -1,8 +1,7 @@
 pipeline {
-    agent any
-    //agent { 
-    //    docker { image 'java' } 
-    //    }
+    agent { 
+        docker { image 'java' } 
+        }
     stages {
         stage('build') {
             steps {
@@ -12,3 +11,4 @@ pipeline {
         }
     }
 }
+
