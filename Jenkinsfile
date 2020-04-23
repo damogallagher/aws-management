@@ -28,7 +28,8 @@ pipeline{
     {
 
        stage("Compilation and Analysis") {
-            parallel 'Compilation': {
+           steps {
+            parallel ('Compilation': {
                 sh "./mvnw clean install -DskipTests"
             }, 'Static Analysis': {
                 stage("Checkstyle") {
@@ -44,7 +45,8 @@ pipeline{
                       useStableBuildAsReference: true
                     ])
                 }
-            }
+            })
+           }
         }
 
         stage("Tests and Deployment") {
