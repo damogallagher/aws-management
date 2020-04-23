@@ -1,4 +1,4 @@
-node {
+pipeline {
 
     jdk = tool name: 'JDK8'
     env.JAVA_HOME = "${jdk}"
@@ -10,10 +10,6 @@ node {
        branch: env.BRANCH_NAME
     )
 
-    options
-    {
-        buildDiscarder(logRotator(numToKeepStr: '3'))
-    }
     agent any
     environment 
     {
