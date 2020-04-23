@@ -29,27 +29,9 @@ pipeline{
                 script {
                     sh "echo $JAVA_HOME "
                     sh "java -version"
-                    sh "./mvnw clean install -DskipTests"
+                    sh "./mvnw clean install -DskipTests=true"
                 }
            }
-        }
-
-        stage("Tests") {
-            steps {
-                    script {
-                        try {
-                            sh "./mvnw test -DskipTests=false"
-                            sh "ls -latr target/"
-                            sh "ls -latr target/surefire-reports/"
-                        } catch(err) {
-                            step([$class: 'JUnitResultArchiver', testResults:
-                            '**/target/surefire-reports/TEST-*Test*.xml'])
-                            throw err
-                        }
-                    step([$class: 'JUnitResultArchiver', testResults:
-                        '**/target/surefire-reports/TEST-*Test*.xml'])
-                }
-            }
         }
     
         stage('Build preparations')
