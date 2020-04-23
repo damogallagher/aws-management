@@ -27,11 +27,12 @@ pipeline{
            steps {
             parallel (
                 'Compilation': {
+                    sh "echo $JAVA_HOME "
+                    sh "java -version"
                     sh "./mvnw clean install -DskipTests"
                 }, 
                 'Static Analysis': {
                     sh "./mvnw checkstyle:checkstyle"
-                    sh "echo $JAVA_HOME "
                     sh "ls -latr "
                     sh "ls -latr target/"
                     /*step([$class: 'CheckStylePublisher',
