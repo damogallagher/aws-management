@@ -1,8 +1,9 @@
 pipeline {
 
-    //jdk = tool name: 'JDK8'
-    //env.JAVA_HOME = "${jdk}"
-    //echo "jdk installation path is: ${jdk}"
+    node {
+    jdk = tool name: 'JDK8'
+    env.JAVA_HOME = "${jdk}"
+    echo "jdk installation path is: ${jdk}"
 
     git(
        url: 'git@github.com:damogallagher/aws-management.git',
@@ -118,6 +119,7 @@ pipeline {
             // make sure that the Docker image is removed
             sh "docker rmi $IMAGE | true"
         }
+    }
     }
 
 }
