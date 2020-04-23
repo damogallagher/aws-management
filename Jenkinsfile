@@ -10,6 +10,22 @@ node {
        branch: env.BRANCH_NAME
     )
 
+    options
+    {
+        buildDiscarder(logRotator(numToKeepStr: '3'))
+    }
+    agent any
+    environment 
+    {
+        VERSION = 'latest'
+        PROJECT = 'aws_management'
+        IMAGE = 'aws_management:latest'
+        ECRURL = 'http://858398790708.dkr.ecr.us-east-1.amazonaws.com'
+        ECRCRED = 'ecr:us-east-1:aws_management'
+    }
+    stages
+    {
+
        stage("Compilation and Analysis") {
             parallel 'Compilation': {
                 sh "./mvnw clean install -DskipTests"
@@ -50,21 +66,6 @@ node {
 
         }
     
-    options
-    {
-        buildDiscarder(logRotator(numToKeepStr: '3'))
-    }
-    agent any
-    environment 
-    {
-        VERSION = 'latest'
-        PROJECT = 'aws_management'
-        IMAGE = 'aws_management:latest'
-        ECRURL = 'http://858398790708.dkr.ecr.us-east-1.amazonaws.com'
-        ECRCRED = 'ecr:us-east-1:aws_management'
-    }
-    stages
-    {
         stage('Build preparations')
         {
             steps
