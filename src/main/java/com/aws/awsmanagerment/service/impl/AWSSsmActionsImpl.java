@@ -14,7 +14,7 @@ import software.amazon.awssdk.services.ssm.model.GetParameterResponse;
 public class AWSSsmActionsImpl implements IAWSSsmActions {
 
     /** Class logger. **/
-    private final Logger LOGGER = LoggerFactory.getLogger(AWSSsmActionsImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(AWSSsmActionsImpl.class);
 
     @Autowired
     private SsmClient ssmClient;
@@ -27,14 +27,14 @@ public class AWSSsmActionsImpl implements IAWSSsmActions {
     public String getParameterStoreValue(String name) {
         String parameterValue = null;
         if (StringUtils.isEmpty(name)) {
-            LOGGER.error("Name passed in is null or empty");
+            logger.error("Name passed in is null or empty");
             return parameterValue;
         }
         GetParameterRequest getParameterRequest = GetParameterRequest.builder().name(name).build();
         GetParameterResponse getParameterResponse = ssmClient.getParameter(getParameterRequest);
 
         if (getParameterResponse == null || getParameterResponse.parameter() == null) {
-            LOGGER.error("Failed to get value from the SSM Parameter store for the name:{}", name);
+            logger.error("Failed to get value from the SSM Parameter store for the name:{}", name);
             return parameterValue;
         }
         parameterValue = getParameterResponse.parameter().value();

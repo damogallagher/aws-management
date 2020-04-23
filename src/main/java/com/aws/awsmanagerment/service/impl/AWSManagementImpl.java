@@ -9,9 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
-import software.amazon.awssdk.services.ec2.Ec2Client;
 import software.amazon.awssdk.services.ec2.model.*;
 
 import java.util.Arrays;
@@ -22,7 +19,7 @@ import java.util.List;
 public class AWSManagementImpl implements IAWSManagement {
 
     /** Class logger. **/
-    private final Logger LOGGER = LoggerFactory.getLogger(AWSInstanceActionsImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(AWSManagementImpl.class);
 
     @Autowired
     private IAWSInstanceActions awsInstanceActions;
@@ -48,7 +45,7 @@ public class AWSManagementImpl implements IAWSManagement {
         List<String> instancesInOtherState = new LinkedList<>();
 
         for (Instance instance : instanceList) {
-            LOGGER.debug("instance:{}", instance.state());
+            logger.debug("instance:{}", instance.state());
             String instanceId = instance.instanceId();
 
             switch ( InstanceStateName.fromValue(instance.state().name().toString())) {
@@ -65,22 +62,19 @@ public class AWSManagementImpl implements IAWSManagement {
 
         boolean instancesStarted = awsInstanceActions.startServers(instancesToStart);
         if (!instancesStarted) {
-            LOGGER.error("Failed to start some instances");
+            logger.error("Failed to start some instances");
         }
         boolean instancesStopped = awsInstanceActions.stopServers(instancesToStop);
         if (!instancesStopped) {
-            LOGGER.error("Failed to stop some instances");
+            logger.error("Failed to stop some instances");
         }
 
-        ResponseDTO responseDTO = ResponseDTO.builder().instancesStarting(instancesToStart)
+        return ResponseDTO.builder().instancesStarting(instancesToStart)
                 .instancesStopping(instancesToStop)
                 .instancesInOtherStates(instancesInOtherState)
                 .totalInstancesStarting(instancesToStart.size())
                 .totalInstancesStopping(instancesToStop.size())
                 .totalInstancesInOtherStates(instancesInOtherState.size()).build();
-
-
-        return responseDTO;
     }
 
 

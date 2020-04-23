@@ -1,9 +1,6 @@
 package com.aws.awsmanagerment.rest;
 
-import com.aws.awsmanagerment.service.IAWSInstanceActions;
 import com.aws.awsmanagerment.service.IAWSInstanceRetrieval;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +12,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/aws/instanceRetrieval")
 public class AWSInstanceRetrievalRestController {
-    /** Class logger. **/
-    private final Logger LOGGER = LoggerFactory.getLogger(AWSInstanceRetrievalRestController.class);
 
     @Autowired
     private IAWSInstanceRetrieval awsInstanceRetrieval;
@@ -36,7 +31,8 @@ public class AWSInstanceRetrievalRestController {
     public List<Instance> describeInstanceWithTagAndValues(@RequestBody List<String> tagValues,
                                                               @RequestParam(value = "tagName", defaultValue = "Environment") String tagName) {
         if (CollectionUtils.isEmpty(tagValues)) {
-            tagValues = Arrays.asList(new String[]{"prod", "production", "Production", "Prod"});
+
+            tagValues = Arrays.asList("prod", "production", "Production", "Prod");
         }
 
         return awsInstanceRetrieval.getInstancesWithTagAndValues(tagName, tagValues);
@@ -51,7 +47,7 @@ public class AWSInstanceRetrievalRestController {
     public List<Instance> describeInstanceWithoutTagAndValues(@RequestBody List<String> tagValues,
                                                                @RequestParam(value = "tagName", defaultValue = "Environment") String tagName) {
         if (CollectionUtils.isEmpty(tagValues)) {
-            tagValues = Arrays.asList(new String[]{"prod", "production", "Production", "Prod"});
+            tagValues = Arrays.asList("prod", "production", "Production", "Prod");
         }
 
         return awsInstanceRetrieval.getInstancesWithoutTagAndValues(tagName, tagValues);

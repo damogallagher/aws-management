@@ -18,7 +18,7 @@ import software.amazon.awssdk.services.ec2.model.*;
 public class AWSInstanceRetrievalImpl implements IAWSInstanceRetrieval {
 
     /** Class logger. **/
-    private final Logger LOGGER = LoggerFactory.getLogger(AWSInstanceActionsImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(AWSInstanceRetrievalImpl.class);
 
     @Autowired
     private IAWSInstanceActions awsInstanceActions;
@@ -48,10 +48,10 @@ public class AWSInstanceRetrievalImpl implements IAWSInstanceRetrieval {
             } while (nextToken != null);
 
         } catch (Exception e) {
-            LOGGER.error("Exception has occured. Exception: {}", e);
+            logger.error("GetAllServers - Exception has occured. Exception: {}", e);
         }
 
-        LOGGER.info("Total Instances: {}", instanceList.size());
+        logger.info("getAllServers Instances count: {}", instanceList.size());
         return instanceList;
     }
 
@@ -63,7 +63,7 @@ public class AWSInstanceRetrievalImpl implements IAWSInstanceRetrieval {
     public List<Instance> getInstancesWithTag(String tagName) {
         List<Instance> instanceList = new LinkedList<>();
         if (StringUtils.isEmpty(tagName)) {
-            LOGGER.error("tagName passed in is null or empty");
+            logger.error("tagName passed in is null or empty");
             return instanceList;
         }
 
@@ -71,12 +71,12 @@ public class AWSInstanceRetrievalImpl implements IAWSInstanceRetrieval {
         try {
             do {
                 Filter filter = Filter.builder().name("tag-key").values(tagName).build();
-                LOGGER.debug("filter: {}", filter);
+                logger.debug("filter: {}", filter);
                 DescribeInstancesRequest describeInstancesRequest = DescribeInstancesRequest.builder().filters(filter).build();
                 DescribeInstancesResponse describeInstancesResponse = ec2Client.describeInstances(describeInstancesRequest);
 
                 if (describeInstancesResponse == null) {
-                    LOGGER.error("Failure occured getting instances for the tag:{}", tagName);
+                    logger.error("An error has occured getting instances for the tag:{}", tagName);
                     return instanceList;
                 }
 
@@ -87,9 +87,9 @@ public class AWSInstanceRetrievalImpl implements IAWSInstanceRetrieval {
             } while (nextToken != null);
 
         } catch (Exception e) {
-            LOGGER.error("Exception has occured. Exception: {}", e);
+            logger.error("An Exception has occured. Exception: {}", e);
         }
-        LOGGER.info("Total Instances: {}", instanceList.size());
+        logger.info("Total Instances for getInstancesWithTag: {}", instanceList.size());
         return instanceList;
     }
     /**
@@ -101,7 +101,7 @@ public class AWSInstanceRetrievalImpl implements IAWSInstanceRetrieval {
     public List<Instance> getInstancesWithTagAndValues(String tagName, List<String> expectedTagValues){
         List<Instance> instanceList = new LinkedList<>();
         if (StringUtils.isEmpty(tagName) || CollectionUtils.isEmpty(expectedTagValues)) {
-            LOGGER.error("tagName passed in is null or empty or expectedTagValues is null or empty");
+            logger.error("tagName passed in is null or empty or expectedTagValues is null or empty");
             return instanceList;
         }
 
@@ -109,13 +109,13 @@ public class AWSInstanceRetrievalImpl implements IAWSInstanceRetrieval {
         try {
             do {
                 Filter filter = Filter.builder().name("tag:"+tagName).values(expectedTagValues).build();
-                LOGGER.debug("filter: {}", filter);
+                logger.debug("filter: {}", filter);
                 DescribeInstancesRequest describeInstancesRequest = DescribeInstancesRequest.builder().filters(filter)
                         .build();
                 DescribeInstancesResponse describeInstancesResponse = ec2Client.describeInstances(describeInstancesRequest);
 
                 if (describeInstancesResponse == null) {
-                    LOGGER.error("Failure occured getting instances for the tag:{}", tagName);
+                    logger.error("An error has occured getting instances for the tag:{}", tagName);
                     return instanceList;
                 }
 
@@ -126,10 +126,10 @@ public class AWSInstanceRetrievalImpl implements IAWSInstanceRetrieval {
             } while (nextToken != null);
 
         } catch (Exception e) {
-            LOGGER.error("Exception has occured. Exception: {}", e);
+            logger.error("An Exception has occured. Exception: {}", e);
         }
 
-        LOGGER.info("Total Instances: {}", instanceList.size());
+        logger.info("getInstancesWithTagAndValues Instances count: {}", instanceList.size());
         return instanceList;
     }
 
@@ -142,7 +142,7 @@ public class AWSInstanceRetrievalImpl implements IAWSInstanceRetrieval {
     public List<Instance> getInstancesWithoutTag(String tagName){
         List<Instance> instanceList = null;
         if (StringUtils.isEmpty(tagName)) {
-            LOGGER.error("tagName passed in is null or empty");
+            logger.error("tagName passed in is null or empty");
             return instanceList;
         }
 
@@ -153,11 +153,11 @@ public class AWSInstanceRetrievalImpl implements IAWSInstanceRetrieval {
                 DescribeInstancesResponse describeInstancesResponse = ec2Client.describeInstances(describeInstancesRequest);
 
                 if (describeInstancesResponse == null) {
-                    LOGGER.error("Failure occured getting instances for the tag:{}", tagName);
+                    logger.error("Failure occured getting instances for the tag:{}", tagName);
                     return instanceList;
                 }
 
-                instanceList = new LinkedList<Instance>();
+                instanceList = new LinkedList<>();
                 for (Reservation reservation : describeInstancesResponse.reservations()) {
                     for (Instance instance : reservation.instances()) {
                         boolean instanceHasRequiredTags = false;
@@ -176,10 +176,13 @@ public class AWSInstanceRetrievalImpl implements IAWSInstanceRetrieval {
             } while (nextToken != null);
 
         } catch (Exception e) {
-            LOGGER.error("Exception has occured. Exception: {}", e);
+            logger.error("Exception has occured. Exception: {}", e);
         }
 
-        LOGGER.info("Total Instances: {}", instanceList.size());
+        if (!CollectionUtils.isEmpty(instanceList)) {
+            logger.info("Total Instances: {}", instanceList.size());
+        }
+
         return instanceList;
     }
 
@@ -192,7 +195,7 @@ public class AWSInstanceRetrievalImpl implements IAWSInstanceRetrieval {
     public List<Instance> getInstancesWithoutTagAndValues(String tagName, List<String> expectedTagValues) {
         List<Instance> instanceList = null;
         if (StringUtils.isEmpty(tagName) || CollectionUtils.isEmpty(expectedTagValues)) {
-            LOGGER.error("tagName passed in is null or empty or the expectedTagValues is null or empty");
+            logger.error("tagName passed in is null or empty or the expectedTagValues is null or empty");
             return instanceList;
         }
 
@@ -203,11 +206,11 @@ public class AWSInstanceRetrievalImpl implements IAWSInstanceRetrieval {
                 DescribeInstancesResponse describeInstancesResponse = ec2Client.describeInstances(describeInstancesRequest);
 
                 if (describeInstancesResponse == null) {
-                    LOGGER.error("Failure occured getting instances for the tag:{}", tagName);
+                    logger.error("Failure occured getting instances for the tag:{}", tagName);
                     return instanceList;
                 }
 
-                instanceList = new LinkedList<Instance>();
+                instanceList = new LinkedList<>();
                 for (Reservation reservation : describeInstancesResponse.reservations()) {
                     for (Instance instance : reservation.instances()) {
                         boolean instanceHasRequiredTags = false;
@@ -226,10 +229,12 @@ public class AWSInstanceRetrievalImpl implements IAWSInstanceRetrieval {
             } while (nextToken != null);
 
         } catch (Exception e) {
-            LOGGER.error("Exception has occured. Exception: {}", e);
+            logger.error("Exception has occured. Exception: {}", e);
         }
 
-        LOGGER.info("Total Instances: {}", instanceList.size());
+        if (!CollectionUtils.isEmpty(instanceList)) {
+            logger.info("Total Instances: {}", instanceList.size());
+        }
         return instanceList;
     }
 
