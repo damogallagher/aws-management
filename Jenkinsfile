@@ -35,7 +35,7 @@ jdk = tool name: 'JDK8'
             parallel 'Unit tests': {
                 stage("Runing unit tests") {
                     try {
-                        sh "./mvnw test -Punit -PskipTests=false"
+                        sh "./mvnw test -DskipTests=false"
                     } catch(err) {
                         step([$class: 'JUnitResultArchiver', testResults:
                           '**/target/surefire-reports/TEST-*UnitTest.xml'])
