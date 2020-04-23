@@ -2,9 +2,9 @@ pipeline{
     agent any
 
 
-   // jdk = tool name: 'JDK8'
-   // env.JAVA_HOME = "${jdk}"
-   // echo "jdk installation path is: ${jdk}"
+    jdk = tool name: 'JDK8'
+    env.JAVA_HOME = "${jdk}"
+    echo "jdk installation path is: ${jdk}"
 
     //git(
     //   url: 'git@github.com:damogallagher/aws-management.git',
