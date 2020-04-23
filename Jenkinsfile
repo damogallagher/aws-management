@@ -1,24 +1,23 @@
 node {
 
-jdk = tool name: 'JDK8'
-  env.JAVA_HOME = "${jdk}"
-
-  echo "jdk installation path is: ${jdk}"
+    jdk = tool name: 'JDK8'
+    env.JAVA_HOME = "${jdk}"
+    echo "jdk installation path is: ${jdk}"
 
     git(
        url: 'git@github.com:damogallagher/aws-management.git',
        credentialsId: 'bitnami',
        branch: env.BRANCH_NAME
     )
-    sh "ls -latr"
+
        stage("Compilation and Analysis") {
             parallel 'Compilation': {
-                sh "ls -latr"
                 sh "./mvnw clean install -DskipTests"
             }, 'Static Analysis': {
                 stage("Checkstyle") {
                     sh "./mvnw checkstyle:checkstyle"
-
+                    sh "ls -latr "
+                    sh "ls -latr target/"
                     step([$class: 'CheckStylePublisher',
                       canRunOnFailed: true,
                       defaultEncoding: '',
