@@ -2,7 +2,7 @@ node {
     git(
        url: 'git@github.com:damogallagher/aws-management.git',
        credentialsId: 'bitnami',
-       branch: "${branch}"
+       branch: env.BRANCH_NAME
     )
     dir('spring-jenkins-pipeline') {
         stage("Compilation and Analysis") {
