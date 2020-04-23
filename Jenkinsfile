@@ -29,10 +29,11 @@ pipeline{
 
        stage("Compilation and Analysis") {
            steps {
-            parallel ('Compilation': {
+            parallel (
+                'Compilation': {
                     sh "./mvnw clean install -DskipTests"
-                }, 'Static Analysis': {
-                stage("Checkstyle") {
+                }, 
+                'Static Analysis': {
                     sh "./mvnw checkstyle:checkstyle"
                     sh "ls -latr "
                     sh "ls -latr target/"
@@ -44,8 +45,8 @@ pipeline{
                       unHealthy: '90',
                       useStableBuildAsReference: true
                     ])
-                }
-            })
+            }
+            )
            }
         }
 
