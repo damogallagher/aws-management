@@ -35,6 +35,8 @@ node {
                 stage("Runing unit tests") {
                     try {
                         sh "./mvnw test -DskipTests=false"
+                        sh "ls -latr target/"
+                        sh "ls -latr target/surefire-reports/"
                     } catch(err) {
                         step([$class: 'JUnitResultArchiver', testResults:
                           '**/target/surefire-reports/TEST-*UnitTest.xml'])
