@@ -1,6 +1,6 @@
 [
   {
-    "name": "awsmanagement-app",
+    "name": "awsmanagement-service",
     "image": "${app_image}",
     "cpu": ${fargate_cpu},
     "memory": ${fargate_memory},
@@ -8,7 +8,7 @@
     "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "/ecs/awsmanagement-app",
+          "awslogs-group": "/ecs/awsmanagement-service",
           "awslogs-region": "${aws_region}",
           "awslogs-stream-prefix": "ecs"
         }

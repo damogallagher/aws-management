@@ -40,7 +40,7 @@ resource "aws_ecs_service" "main" {
 
   load_balancer {
     target_group_arn = aws_alb_target_group.app.id
-    container_name   = "awsmanagement-app"
+    container_name   = "awsmanagement-service"
     container_port   = var.container_app_port
   }
 
