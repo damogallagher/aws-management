@@ -1,4 +1,10 @@
 node {
+
+jdk = tool name: 'JDK17'
+  env.JAVA_HOME = "${jdk}"
+
+  echo "jdk installation path is: ${jdk}"
+
     git(
        url: 'git@github.com:damogallagher/aws-management.git',
        credentialsId: 'bitnami',
