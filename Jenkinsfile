@@ -1,7 +1,9 @@
 pipeline{
     agent any
 
-
+env.JAVA_HOME="${tool 'jdk-8u45'}"
+    env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
+    sh 'java -version'
 
 
     //git(
@@ -12,9 +14,6 @@ pipeline{
     options
     {
         buildDiscarder(logRotator(numToKeepStr: '3'))
-            jdk = tool name: 'JDK8'
-    env.JAVA_HOME = "${jdk}"
-    echo "jdk installation path is: ${jdk}"
     }
 
     environment 
