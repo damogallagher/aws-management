@@ -1,5 +1,5 @@
 node {
-    stage 'Clone the project' {
+    stage ("Clone the project") {
         checkout scm
     }
     dir('spring-jenkins-pipeline') {
