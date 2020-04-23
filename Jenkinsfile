@@ -30,8 +30,8 @@ pipeline{
        stage("Compilation and Analysis") {
            steps {
             parallel ('Compilation': {
-                sh "./mvnw clean install -DskipTests"
-            }, 'Static Analysis': {
+                    sh "./mvnw clean install -DskipTests"
+                }, 'Static Analysis': {
                 stage("Checkstyle") {
                     sh "./mvnw checkstyle:checkstyle"
                     sh "ls -latr "
@@ -49,8 +49,8 @@ pipeline{
            }
         }
 
-        stage("Tests and Deployment") {
-                stage("Running unit tests") {
+        stage("Tests") {
+                steps {
                     try {
                         sh "./mvnw test -DskipTests=false"
                         sh "ls -latr target/"
