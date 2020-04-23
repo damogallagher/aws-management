@@ -1,4 +1,4 @@
-pipeline {
+new Pipeline(this).withMaven('3.5.0').withJava('8').execute {
 
     node {
     jdk = tool name: 'JDK8'
