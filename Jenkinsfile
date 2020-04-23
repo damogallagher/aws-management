@@ -1,5 +1,8 @@
 pipeline {
-    agent { docker { image 'java' } }
+    agent { 
+        label 'docker' 
+        docker { image 'java' } 
+        }
     stages {
         stage('build') {
             steps {
