@@ -1,6 +1,6 @@
 node {
     stage 'Clone the project'
-    git 'https://github.com/damogallagher/aws-management.git'
+    git 'git@github.com:damogallagher/aws-management.git'
 
     dir('spring-jenkins-pipeline') {
         stage("Compilation and Analysis") {
