@@ -1,6 +1,6 @@
 node {
     stage 'Clone the project'
-
+    sh "ls -latr"
     dir('spring-jenkins-pipeline') {
         stage("Compilation and Analysis") {
             parallel 'Compilation': {
