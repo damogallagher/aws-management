@@ -29,10 +29,10 @@ pipeline{
                 'Compilation': {
                     sh "echo $JAVA_HOME "
                     sh "java -version"
-                    sh "mvn clean install -DskipTests"
+                    sh "./mvnw clean install -DskipTests"
                 }, 
                 'Static Analysis': {
-                    sh "mvn checkstyle:checkstyle"
+                    sh "./mvnw checkstyle:checkstyle"
                     sh "ls -latr "
                     sh "ls -latr target/"
                     /*step([$class: 'CheckStylePublisher',
