@@ -30,6 +30,7 @@ pipeline{
                 }, 
                 'Static Analysis': {
                     sh "./mvnw checkstyle:checkstyle"
+                    sh "echo $JAVA_HOME "
                     sh "ls -latr "
                     sh "ls -latr target/"
                     /*step([$class: 'CheckStylePublisher',
