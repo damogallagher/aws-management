@@ -20,4 +20,16 @@ public interface IAWSManagement {
      * @return
      */
     ResponseDTO performServerActions();
+
+    /**
+     * Method to stop all servers
+     * @return
+     */
+    ResponseDTO stopAllServers();
+
+    /**
+     * Method to start all servers
+     * @return
+     */
+    ResponseDTO startAllServers();
 }

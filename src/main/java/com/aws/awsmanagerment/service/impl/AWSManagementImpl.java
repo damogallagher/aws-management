@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import software.amazon.awssdk.services.ec2.model.*;
 
 import java.util.Arrays;
@@ -93,5 +94,57 @@ public class AWSManagementImpl implements IAWSManagement {
         List<String> tagValueList = Arrays.asList(tagValue.split("\\|"));
 
         return performServerActions(tagName, tagValueList);
+    }
+
+    /**
+     * Method to stop all servers
+     * @return
+     */
+    public ResponseDTO stopAllServers() {
+        List<Instance> instances = awsInstanceRetrieval.getAllServers();
+        if (CollectionUtils.isEmpty(instances)) {
+            logger.error("No instances returned from AWS");
+            return ResponseDTO.builder().totalInstancesStopping(0).build();
+        }
+
+        List<String> instancesStopping = new LinkedList<>();
+        for (Instance instance : instances) {
+            String instanceId = instance.instanceId();
+            instancesStopping.add(instanceId);
+        }
+
+        boolean stopInstancesResult = awsInstanceActions.stopServers(instancesStopping);
+        if (!stopInstancesResult) {
+            logger.error("Failed to stop some instances");
+        }
+        return ResponseDTO.builder()
+                .instancesStopping(instancesStopping)
+                .totalInstancesStopping(instancesStopping.size()).build();
+    }
+
+    /**
+     * Method to start all servers
+     * @return
+     */
+    public ResponseDTO startAllServers() {
+        List<Instance> instances = awsInstanceRetrieval.getAllServers();
+        if (CollectionUtils.isEmpty(instances)) {
+            logger.error("No instances returned from AWS");
+            return ResponseDTO.builder().totalInstancesStopping(0).build();
+        }
+
+        List<String> instancesStarting = new LinkedList<>();
+        for (Instance instance : instances) {
+            String instanceId = instance.instanceId();
+            instancesStarting.add(instanceId);
+        }
+
+        boolean startInstancesResult = awsInstanceActions.startServers(instancesStarting);
+        if (!startInstancesResult) {
+            logger.error("Failed to start some instances");
+        }
+        return ResponseDTO.builder()
+                .instancesStarting(instancesStarting)
+                .totalInstancesStarting(instancesStarting.size()).build();
     }
 }

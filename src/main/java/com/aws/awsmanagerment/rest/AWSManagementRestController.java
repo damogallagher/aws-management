@@ -30,4 +30,14 @@ public class AWSManagementRestController {
 
         return awsManagement.performServerActions(tagName, tagValues);
     }
+
+    @GetMapping("/stopAllServers")
+    public ResponseDTO stopAllServers() {
+        return awsManagement.stopAllServers();
+    }
+
+    @GetMapping("/startAllServers")
+    public ResponseDTO startAllServers() {
+        return awsManagement.startAllServers();
+    }
 }
