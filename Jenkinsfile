@@ -32,14 +32,14 @@ pipeline{
                     sh "./mvnw checkstyle:checkstyle"
                     sh "ls -latr "
                     sh "ls -latr target/"
-                    step([$class: 'CheckStylePublisher',
+                    /*step([$class: 'CheckStylePublisher',
                       canRunOnFailed: true,
                       defaultEncoding: '',
                       healthy: '100',
-                      pattern: '**/target/checkstyle-result.xml',
+                      pattern: '/target/checkstyle-result.xml',
                       unHealthy: '90',
                       useStableBuildAsReference: true
-                    ])
+                    ])*/
             }
             )
            }
