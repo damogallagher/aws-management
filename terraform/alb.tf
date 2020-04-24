@@ -10,6 +10,7 @@ resource "aws_alb_target_group" "app" {
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
   target_type = "ip"
+  deregistration_delay = 60
 
   health_check {
     healthy_threshold   = "3"
