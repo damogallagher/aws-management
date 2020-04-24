@@ -22,7 +22,7 @@ public class AWSManagementRestController {
     }
 
     @PostMapping("/serverActions")
-    public ResponseDTO describeInstanceWithTagAndValues(@RequestBody List<String> tagValues,
+    public ResponseDTO performServerActions(@RequestBody List<String> tagValues,
                                                         @RequestParam(value = "tagName", defaultValue = "Environment") String tagName) {
         if (CollectionUtils.isEmpty(tagValues)) {
             tagValues = Arrays.asList("prod", "production", "Production", "Prod");
@@ -43,6 +43,6 @@ public class AWSManagementRestController {
 
     @GetMapping("/hello")
     public String hello() {
-        return "Hello World 123";
+        return "Hello World abc";
     }
 }
