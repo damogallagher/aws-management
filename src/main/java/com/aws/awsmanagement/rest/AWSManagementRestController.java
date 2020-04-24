@@ -43,6 +43,6 @@ public class AWSManagementRestController {
 
     @GetMapping("/hello")
     public String hello() {
-        return "Hello World abc";
+        return "Hello World";
     }
 }
