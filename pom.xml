@@ -18,7 +18,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<skipTests>true</skipTests>
-		<logback-classic.version>1.2.3</logback-classic.version>
+		<logback-classic.version>1.2.13</logback-classic.version>
 		<software.amazon.awssdk.version>2.13.0</software.amazon.awssdk.version>
 		<springfox-swagger2.verison>2.9.2</springfox-swagger2.verison>
 		<springfox-swagger-ui.version>2.9.2</springfox-swagger-ui.version>
